@@ -16,6 +16,6 @@ jobs:
           docker build -t quartic/uber-builder:${CIRCLE_BUILD_NUM} .
 
       - deploy:
-        - command: |
+          command: |
             docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
             docker push quartic/uber-builder:${CIRCLE_BUILD_NUM}
