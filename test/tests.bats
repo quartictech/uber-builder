@@ -17,7 +17,7 @@
 }
 
 @test "Yarn can install package that needs make" {
-    yarn add gulp-sass@1.2.1
+    yarn add gulp-sass@2.1.0
     yarn remove gulp-sass
 }
 
