@@ -33,6 +33,7 @@
 
 # This will also fail if Docker client isn't installed
 @test "Can login to GCloud Docker registry" {
+    dockerd
     gcloud-auth --with-docker
     docker pull eu.gcr.io/quartictech/scheduled-jobs:85  # Some random image (the smallest one I could find)
 }
