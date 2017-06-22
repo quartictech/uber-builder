@@ -1,7 +1,10 @@
 FROM google/cloud-sdk:159.0.0-slim
 
-# Needed for various npm package installs
-RUN apt-get install -y bzip2 build-essential
+# Needed for various npm/bower package installs
+RUN apt-get install -y \
+    build-essential \
+    bzip2 \
+    git
 
 # Node (see https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
 RUN \
@@ -22,7 +25,6 @@ RUN \
 RUN \
     yarn global add bower@1.8.0 && \
     echo '{ "allow_root": true }' > /root/.bowerrc
-
 
 # Add stuff
 ADD gcloud-auth /scripts/
