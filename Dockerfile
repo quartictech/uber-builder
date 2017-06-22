@@ -1,10 +1,20 @@
+# This is based on Debian 8.8 (jessie)
 FROM google/cloud-sdk:159.0.0-slim
 
 # Needed for various npm/bower package installs
-RUN apt-get install -y \
-    build-essential \
+RUN apt-get update && apt-get install -y \
+    build-essential=11.7 \
     bzip2 \
     git
+
+####################
+# Docker client
+# (see http://docs.master.dockerproject.org/engine/installation/linux/debian/#/debian-jessie-80-64-bit)
+####################
+RUN \
+    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
+    echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list && \
+    apt-get update && apt-get install -y docker-engine=17.05.0~ce-0~debian-jessie
 
 ####################
 # Node
@@ -22,17 +32,21 @@ RUN \
 ####################
 RUN \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && \
-    apt-get install -y yarn
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install -y yarn=2.4.6
 
 ####################
 # Bower
-# (Note the need to work around Bower's arrogant BS due to assuming it's running via sudo)
+# (Note the need to work around Bower's arrogant BS due to it assuming it's running via sudo)
 ####################
 RUN \
     yarn global add bower@1.8.0 && \
     echo '{ "allow_root": true }' > /root/.bowerrc
+
+####################
+# JDK
+####################
+# TODO
 
 ####################
 # Other helpful stuff
