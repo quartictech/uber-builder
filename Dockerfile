@@ -18,7 +18,11 @@ RUN \
     apt-get install -y yarn
 
 # Bower
-RUN yarn global add bower@1.8.0
+# (Note the need to work around Bower's arrogant BS due to assuming it's running via sudo)
+RUN \
+    yarn global add bower@1.8.0 && \
+    echo '{ "allow_root": true }' > /root/.bowerrc
+
 
 # Add stuff
 ADD gcloud-auth /scripts/
