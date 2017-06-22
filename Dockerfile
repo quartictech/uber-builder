@@ -9,8 +9,8 @@ RUN \
     curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get install -y nodejs=8.1.2-1nodesource1~jessie1
 
-# Yarn
-RUN sudo npm install --global yarn@0.24.6
+# # Yarn
+# RUN sudo npm install --global yarn@0.24.6
 
 # # Bower
 # RUN sudo yarn global add bower@1.8.0
