@@ -9,7 +9,13 @@ RUN \
     curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get install -y nodejs=8.1.2-1nodesource1~jessie1
 
-# # Yarn
+# Yarn (see https://yarnpkg.com/lang/en/docs/install/#linux-tab)
+RUN \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && \
+    apt-get install yarn
+
 # RUN sudo npm install --global yarn@0.24.6
 
 # # Bower
