@@ -4,4 +4,8 @@ set -eu
 echo ${GCLOUD_SERVICE_KEY} | base64 -d > ${HOME}/gcloud-service-key.json
 gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
 gcloud config set project ${GCLOUD_PROJECT_ID}
-docker login -e 1234@5678.com -u oauth2accesstoken -p "$(gcloud auth print-access-token)" https://eu.gcr.io
+
+# TODO: parse args for --with-docker
+if [ "$#" -eq 1 ]; then
+    docker login -e 1234@5678.com -u oauth2accesstoken -p "$(gcloud auth print-access-token)" https://eu.gcr.io
+fi
