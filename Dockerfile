@@ -49,6 +49,11 @@ RUN \
 # TODO
 
 ####################
+# Python
+####################
+# TODO
+
+####################
 # Other helpful stuff
 ####################
 ADD gcloud-auth /scripts/

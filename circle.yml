@@ -12,11 +12,18 @@ jobs:
 
       - setup_remote_docker
 
-      - run: |
-          docker build -t quartic/uber-builder:${CIRCLE_BUILD_NUM} .
+      - run:
+          name: Build image
+          command: docker build -t quartic/uber-builder:${CIRCLE_BUILD_NUM} .
 
       - run: |
-          docker run quartic/uber-builder:${CIRCLE_BUILD_NUM} yarn --version
+          name: Run tests
+          command: |
+            git clone https://github.com/sstephenson/bats.git
+            pushd bats
+            ./install.sh /usr/local
+            popd
+            bats tests.bats
 
       # - deploy:
       #     command: |
