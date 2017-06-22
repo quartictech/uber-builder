@@ -16,16 +16,12 @@ jobs:
           name: Build image
           command: docker build -t quartic/uber-builder:${CIRCLE_BUILD_NUM} .
 
-      - run: |
+      - run:
           name: Run tests
           command: |
-            git clone https://github.com/sstephenson/bats.git
-            pushd bats
-            ./install.sh /usr/local
-            popd
-            bats tests.bats
+            docker run -v $(pwd)/test:/test quartic/uber-builder:${CIRCLE_BUILD_NUM} /test/run_tests.sh
 
-      # - deploy:
-      #     command: |
-      #       docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
-      #       docker push quartic/uber-builder:${CIRCLE_BUILD_NUM}
+      - deploy:
+          command: |
+            docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
+            docker push quartic/uber-builder:${CIRCLE_BUILD_NUM}
