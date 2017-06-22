@@ -13,7 +13,7 @@ RUN \
 RUN sudo npm install --global yarn@0.24.6
 
 # Bower
-RUN yarn global add bower@1.8.0
+RUN sudo yarn global add bower@1.8.0
 
 # Add stuff
 ADD gcloud-auth /scripts/
