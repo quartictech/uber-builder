@@ -14,3 +14,5 @@ RUN yarn global add bower@1.8.0
 # Add stuff
 ADD gcloud-auth /scripts/
 ENV PATH="/scripts:${PATH}"
+# Fix for CircleCI uid/gid weirdness (see https://discuss.circleci.com/t/failed-to-register-layer-error-processing-tar-file-exit-status-1-container-id-249512-cannot-be-mapped-to-a-host-id/13453/5)
+RUN chown -R root:root /scripts
