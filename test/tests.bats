@@ -10,12 +10,6 @@
     yarn remove redux
 }
 
-# This will also fail if Git isn't installed
-@test "Bower can install things" {
-    bower install redux@3.7.0
-    bower uninstall redux
-}
-
 @test "Yarn can install package that needs make" {
     yarn add time@0.12.0
     yarn remove time
