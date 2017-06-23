@@ -17,8 +17,8 @@
 }
 
 @test "Yarn can install package that needs make" {
-    yarn add gulp-sass@2.1.0
-    yarn remove gulp-sass
+    yarn add time@0.12.0
+    yarn remove time
 }
 
 @test "Yarn can install package that needs bzip2" {
