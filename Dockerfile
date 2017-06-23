@@ -5,7 +5,8 @@ FROM google/cloud-sdk:159.0.0-slim
 RUN apt-get update && apt-get install -y \
     build-essential=11.7 \
     bzip2 \
-    git
+    git && \
+    rm -rf /var/lib/apt/lists/*
 
 ####################
 # Docker client
@@ -14,7 +15,8 @@ RUN apt-get update && apt-get install -y \
 RUN \
     apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
     echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list && \
-    apt-get update && apt-get install -y docker-engine=17.05.0~ce-0~debian-jessie
+    apt-get update && apt-get install -y docker-engine=17.05.0~ce-0~debian-jessie && \
+    rm -rf /var/lib/apt/lists/*
 
 ####################
 # Node
@@ -22,7 +24,8 @@ RUN \
 ####################
 RUN \
     curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
-    apt-get install -y nodejs=8.1.2-1nodesource1~jessie1
+    apt-get install -y nodejs=8.1.2-1nodesource1~jessie1 && \
+    rm -rf /var/lib/apt/lists/*
 
 ####################
 # Yarn
@@ -33,7 +36,8 @@ RUN \
 RUN \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y yarn=0.24.6-1
+    apt-get update && apt-get install -y yarn=0.24.6-1 && \
+    rm -rf /var/lib/apt/lists/*
 
 ####################
 # Bower
