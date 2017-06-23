@@ -10,12 +10,6 @@
     yarn remove redux
 }
 
-# This will also fail if Git isn't installed
-@test "Bower can install things" {
-    bower install redux@3.7.0
-    bower uninstall redux
-}
-
 @test "Yarn can install package that needs make" {
     yarn add time@0.12.0
     yarn remove time
@@ -24,6 +18,25 @@
 @test "Yarn can install package that needs bzip2" {
     yarn add phantomjs-prebuilt@2.1.14
     yarn remove phantomjs-prebuilt
+}
+
+@test "Java can compile and run Java8 things" {
+    javac Hello.java
+    java Hello
+}
+
+@test "Rsync is installed" {
+    touch foo.txt
+    rsync foo.txt bar.txt
+}
+
+@test "Git is installed" {
+    git clone https://github.com/reactjs/redux.git
+}
+
+@test "SSH is installed" {
+    # This is kind of lame, but a more useful functional tests would require registering keys, etc.
+    ssh -V
 }
 
 @test "Can authenticate to GCloud" {
