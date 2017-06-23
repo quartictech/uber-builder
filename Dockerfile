@@ -27,10 +27,11 @@ RUN \
         docker-engine=17.05.0~ce-0~debian-jessie \
         nodejs=8.1.2-1nodesource1~jessie1 \
         yarn=0.24.6-1 \
-        # Everything below is needed by various npm package installs
+        # Other required things
         build-essential=11.7 \
         bzip2 \
-        git && \
+        git \
+        rsync && \
     apt-get install --no-install-recommends -y -t jessie-backports \
         openjdk-8-jdk=8u131-b11-1~bpo8+1 && \
     rm -rf /var/lib/apt/lists/*

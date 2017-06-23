@@ -25,6 +25,15 @@
     java Hello
 }
 
+@test "Rsync is installed" {
+    touch foo.txt
+    rsync foo.txt bar.txt
+}
+
+@test "Git is installed" {
+    git clone https://github.com/reactjs/redux.git
+}
+
 @test "Can authenticate to GCloud" {
     gcloud-auth
     gcloud compute instances list
