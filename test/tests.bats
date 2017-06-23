@@ -34,6 +34,11 @@
     git clone https://github.com/reactjs/redux.git
 }
 
+@test "SSH is installed" {
+    # This is kind of lame, but a more useful functional tests would require registering keys, etc.
+    ssh -V
+}
+
 @test "Can authenticate to GCloud" {
     gcloud-auth
     gcloud compute instances list

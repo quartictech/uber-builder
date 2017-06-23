@@ -31,7 +31,8 @@ RUN \
         build-essential=11.7 \
         bzip2 \
         git \
-        rsync && \
+        rsync \
+        ssh && \
     apt-get install --no-install-recommends -y -t jessie-backports \
         openjdk-8-jdk=8u131-b11-1~bpo8+1 && \
     rm -rf /var/lib/apt/lists/*
