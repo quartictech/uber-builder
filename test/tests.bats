@@ -26,7 +26,7 @@
     yarn remove phantomjs-prebuilt
 }
 
-@test "Java can compile and run things" {
+@test "Java can compile and run Java8 things" {
     javac Hello.java
     java Hello
 }

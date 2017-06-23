@@ -1,5 +1,6 @@
 public class Hello {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        final Runnable runnable = () -> System.out.println("Hello world!"); // Java 8+
+        runnable.run();
     }
 }
