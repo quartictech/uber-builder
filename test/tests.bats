@@ -26,6 +26,11 @@
     yarn remove phantomjs-prebuilt
 }
 
+@test "Java can compile and run things" {
+    javac Hello.java
+    java Hello
+}
+
 @test "Can authenticate to GCloud" {
     gcloud-auth
     gcloud compute instances list

@@ -7,4 +7,6 @@ pushd bats
 ./install.sh /usr/local
 popd
 
-bats ${DIR}/tests.bats
+pushd ${DIR}
+bats tests.bats
+popd
