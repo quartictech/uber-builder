@@ -37,6 +37,34 @@ RUN \
         openjdk-8-jdk=8u131-b11-1~bpo8+1 && \
     rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install unzip && \
+    mkdir -p /usr/local/android-sdk-linux && \
+    curl -o tools.zip https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip && \
+    unzip tools.zip -d /usr/local/android-sdk && \
+    rm tools.zip
+
+# Add android tools and platform tools to PATH
+ENV ANDROID_HOME /usr/local/android-sdk
+ENV PATH=${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${PATH}
+RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
+
+RUN sdkmanager --update && yes | sdkmanager --licenses
+
+# Update and install using sdkmanager RUN $ANDROID_HOME/tools/bin/sdkmanager "tools" "platform-tools"
+RUN sdkmanager \
+  "tools" \
+  "platform-tools" \
+  "emulator" \
+  "extras;android;m2repository" \
+  "extras;google;m2repository" \
+  "extras;google;google_play_services"
+
+RUN sdkmanager \
+  "build-tools;25.0.3" \
+  "platforms;android-25" \
+  "system-images;android-25;google_apis;armeabi-v7a"
+
 # Helper scripts
 ADD /scripts /scripts
 ENV PATH="/scripts:${PATH}"
+RUN echo "no" | /usr/local/android-sdk/tools/android create avd -f -n test -k "system-images;android-25;google_apis;armeabi-v7a" --abi 'google_apis/armeabi-v7a'
