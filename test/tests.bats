@@ -5,6 +5,11 @@
     npm uninstall redux
 }
 
+# This command fails with NPM 5.0.0 -> 5.3.0, but works with 4.6.1
+@test "NPM can install Yarn globally via Gradle" {
+    ./gradlew installYarn
+}
+
 @test "Yarn can install things" {
     yarn add redux@3.7.0
     yarn remove redux
@@ -21,8 +26,7 @@
 }
 
 @test "Java can compile and run Java8 things" {
-    javac Hello.java
-    java Hello
+    ./gradlew compileJava
 }
 
 @test "Rsync is installed" {

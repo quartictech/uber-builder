@@ -1,0 +1,5 @@
+apply plugin: "java"
+
+task installYarn(type: Exec) {
+    commandLine "npm", "install", "--global", "--no-save", "--prefix", "${projectDir}/build/yarn", "yarn@0.27.5"
+}
