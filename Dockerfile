@@ -37,8 +37,8 @@ RUN \
         openjdk-8-jdk=8u131-b11-1~bpo8+1 && \
     rm -rf /var/lib/apt/lists/*
 
-# # Downgrade to NPM 4, because NPM 5 is utterly raging
-# RUN npm install -g npm@4.6.1
+# Downgrade to NPM 4, because NPM 5 is utterly raging
+RUN npm install -g npm@4.6.1
 
 # Helper scripts
 ADD /scripts /scripts
