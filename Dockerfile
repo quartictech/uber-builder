@@ -25,7 +25,7 @@ RUN \
     apt-get update && \
     apt-get install --no-install-recommends -y \
         docker-engine=17.05.0~ce-0~debian-jessie \
-        nodejs=8.1.2-1nodesource1~jessie1 \
+        nodejs=8.1.4-2nodesource1~jessie1 \
         yarn=0.24.6-1 \
         # Other required things
         build-essential=11.7 \

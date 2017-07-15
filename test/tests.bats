@@ -5,6 +5,7 @@
     npm uninstall redux
 }
 
+# This command failed with Node 8.1.2 (=> NPM 5.0.3)
 @test "NPM can install stuff without breaking" {
     npm install --global --no-save --prefix yarn yarn@0.27.5
 }
