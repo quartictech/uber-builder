@@ -5,6 +5,10 @@
     npm uninstall redux
 }
 
+@test "NPM can install stuff without breaking" {
+    npm install --global --no-save --prefix yarn yarn@0.27.5
+}
+
 @test "Yarn can install things" {
     yarn add redux@3.7.0
     yarn remove redux
