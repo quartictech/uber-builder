@@ -5,9 +5,9 @@
     npm uninstall redux
 }
 
-# This command failed with Node 8.1.2 (=> NPM 5.0.3)
-@test "NPM can install stuff without breaking" {
-    npm install --global --no-save --prefix yarn yarn@0.27.5
+# This command fails with NPM 5.0.0 -> 5.3.0
+@test "NPM can install Yarn globally via Gradle" {
+    ./gradlew installYarn
 }
 
 @test "Yarn can install things" {
@@ -26,8 +26,7 @@
 }
 
 @test "Java can compile and run Java8 things" {
-    javac Hello.java
-    java Hello
+    ./gradlew compileJava
 }
 
 @test "Rsync is installed" {
