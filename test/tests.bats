@@ -29,6 +29,11 @@
     ./gradlew compileJava
 }
 
+# We specifically care about Jekyll for now
+@test "Ruby Bundler can install Jekyll" {
+    bundle install
+}
+
 @test "Rsync is installed" {
     touch foo.txt
     rsync foo.txt bar.txt
@@ -38,8 +43,8 @@
     git clone https://github.com/reactjs/redux.git
 }
 
+# This is kind of lame, but a more useful functional tests would require registering keys, etc.
 @test "SSH is installed" {
-    # This is kind of lame, but a more useful functional tests would require registering keys, etc.
     ssh -V
 }
 
