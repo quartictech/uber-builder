@@ -35,7 +35,7 @@
 }
 
 @test "Aspell can check for GB spelling" {
-    test "color" == "$(echo 'color colour' | aspell list -l en_GB)
+    test "color" == "$(echo 'color colour' | aspell list -l en_GB)"
 }
 
 @test "Rsync is installed" {
