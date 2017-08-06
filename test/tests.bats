@@ -34,6 +34,10 @@
     bundle install
 }
 
+@test "Aspell can check for GB spelling" {
+    test "color" == "$(echo 'color colour' | aspell list -l en_GB)
+}
+
 @test "Rsync is installed" {
     touch foo.txt
     rsync foo.txt bar.txt

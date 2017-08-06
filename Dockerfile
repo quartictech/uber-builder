@@ -30,6 +30,7 @@ RUN \
         ruby=1:2.1.5+deb8u2 \
         ruby-dev=1:2.1.5+deb8u2 \
         # Other required things
+        aspell=0.60.7~20110707-1.3 \
         build-essential=11.7 \
         bzip2 \
         git \
