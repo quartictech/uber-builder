@@ -25,9 +25,11 @@ RUN \
     apt-get update && \
     apt-get install --no-install-recommends -y \
         docker-engine=17.05.0~ce-0~debian-jessie \
-        nodejs=8.1.4-2nodesource1~jessie1 \
+        nodejs=8.2.1-2nodesource1~jessie1 \
         yarn=0.24.6-1 \
+        ruby=1:2.1.5+deb8u2 ruby-dev=1:2.1.5+deb8u2 \
         # Other required things
+        aspell=0.60.7~20110707-1.3 aspell-en=7.1-0-1.1 \
         build-essential=11.7 \
         bzip2 \
         git \
@@ -39,6 +41,10 @@ RUN \
 
 # Downgrade to NPM 4, because NPM 5 is utterly raging
 RUN npm install -g npm@4.6.1
+
+# Install Bundler (and disable warning given that we have to run as root)
+RUN gem install bundler -v 1.15.3 && \
+    bundle config --global silence_root_warning 1
 
 # Helper scripts
 ADD /scripts /scripts
