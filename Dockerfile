@@ -3,9 +3,9 @@ FROM google/cloud-sdk:159.0.0-slim
 
 RUN \
     # Docker client
-    # (see http://docs.master.dockerproject.org/engine/installation/linux/debian/#/debian-jessie-80-64-bit)
-    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
-    echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list && \
+    # (see https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
+    curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
+    echo "deb [arch=amd64] https://download.docker.com/linux/debian jessie stable" > /etc/apt/sources.list.d/docker.list && \
 
     # Node
     # (see https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
@@ -24,7 +24,7 @@ RUN \
     # Finally
     apt-get update && \
     apt-get install --no-install-recommends -y \
-        docker-engine=17.05.0~ce-0~debian-jessie \
+        docker-ce=17.06.0~ce-0~debian \
         nodejs=8.2.1-2nodesource1~jessie1 \
         yarn=0.24.6-1 \
         ruby=1:2.1.5+deb8u2 ruby-dev=1:2.1.5+deb8u2 \
