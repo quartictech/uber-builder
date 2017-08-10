@@ -34,6 +34,12 @@
     bundle install
 }
 
+@test "Can create a Python3 virtualenv" {
+    python3 -m venv .env
+    source .env/bin/activate
+    python -c 'print("Hello")'      # Would fail if Python 2
+}
+
 @test "Aspell can check for GB spelling" {
     test "color" == "$(echo 'color colour' | aspell list -l en_GB)"
 }
