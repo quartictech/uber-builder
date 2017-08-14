@@ -47,7 +47,7 @@ RUN useradd -ms /bin/bash quartic
 
 # Helper scripts
 ADD /scripts /scripts
-ENV PATH="/scripts:/home/quartic/.gem:${PATH}"
+ENV PATH="/scripts:/home/quartic/.gem/bin:${PATH}"
 
 USER quartic
 
