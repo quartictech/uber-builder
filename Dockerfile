@@ -43,9 +43,7 @@ RUN \
 # Downgrade to NPM 4, because NPM 5 is utterly raging
 RUN npm install -g npm@4.6.1
 
-# Install Bundler (and disable warning given that we have to run as root)
-RUN gem install bundler -v 1.15.3 && \
-    bundle config --global silence_root_warning 1
+
 
 RUN useradd -ms /bin/bash quartic
 
@@ -54,4 +52,9 @@ ADD /scripts /scripts
 ENV PATH="/scripts:${PATH}"
 
 USER quartic
+
+# Install Bundler (and disable warning given that we have to run as root)
+RUN gem install bundler -v 1.15.3 && \
+    bundle config --global silence_root_warning 1
+
 WORKDIR /home/quartic
