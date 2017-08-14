@@ -24,7 +24,6 @@ jobs:
             docker create -e "GCLOUD_SERVICE_KEY=${GCLOUD_SERVICE_KEY}" -e "GCLOUD_PROJECT_ID=${GCLOUD_PROJECT_ID}" \
               --name test quartic/uber-builder:${CIRCLE_BUILD_NUM} /home/quartic/test/run_tests.sh
             docker cp $(pwd)/test test:/home/quartic/test
-            docker exec -it test chown -R quartic:quartic /home/quartic/test
             docker start -a test
 
       - deploy:

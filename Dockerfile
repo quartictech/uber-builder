@@ -47,7 +47,7 @@ RUN npm install -g npm@4.6.1
 RUN gem install bundler -v 1.15.3 && \
     bundle config --global silence_root_warning 1
 
-RUN useradd -ms /bin/bash quartic && chown -R quartic /home/quartic
+RUN useradd -ou 0 -g 0 -ms /bin/bash quartic
 
 # Helper scripts
 ADD /scripts /scripts
