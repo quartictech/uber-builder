@@ -22,7 +22,7 @@ jobs:
           # See https://circleci.com/docs/2.0/building-docker-images/#mounting-folders
           command: |
             docker create -e "GCLOUD_SERVICE_KEY=${GCLOUD_SERVICE_KEY}" -e "GCLOUD_PROJECT_ID=${GCLOUD_PROJECT_ID}" \
-              --name test quartic/uber-builder:${CIRCLE_BUILD_NUM} /test/run_tests.sh
+              --name test quartic/uber-builder:${CIRCLE_BUILD_NUM} /home/quartic/test/run_tests.sh
             docker cp $(pwd)/test test:/test
             docker start -a test
 
