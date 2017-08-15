@@ -1,5 +1,5 @@
 # This is based on Debian 8.8 (jessie)
-FROM google/cloud-sdk:159.0.0-slim
+FROM google/cloud-sdk:166.0.0-slim
 
 RUN \
     # Docker client
@@ -25,7 +25,7 @@ RUN \
     apt-get update && \
     apt-get install --no-install-recommends -y \
         docker-ce=17.06.0~ce-0~debian \
-        nodejs=8.2.1-2nodesource1~jessie1 \
+        nodejs=8.3.0-1nodesource1~jessie1\
         yarn=0.24.6-1 \
         ruby=1:2.1.5+deb8u2 ruby-dev=1:2.1.5+deb8u2 \
         python3-venv=3.4.2-2 \
@@ -43,10 +43,17 @@ RUN \
 # Downgrade to NPM 4, because NPM 5 is utterly raging
 RUN npm install -g npm@4.6.1
 
-# Install Bundler (and disable warning given that we have to run as root)
-RUN gem install bundler -v 1.15.3 && \
-    bundle config --global silence_root_warning 1
+RUN useradd -ms /bin/bash quartic
 
 # Helper scripts
 ADD /scripts /scripts
-ENV PATH="/scripts:${PATH}"
+ENV PATH="/scripts:/home/quartic/.gem/bin:${PATH}"
+
+USER quartic
+
+# Install Bundler (and disable warning given that we have to run as root)
+ENV GEM_HOME="/home/quartic/.gem"
+RUN gem install bundler -v 1.15.3 && \
+    bundle config --global silence_root_warning 1
+
+WORKDIR /home/quartic
