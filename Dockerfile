@@ -1,5 +1,5 @@
 # This is based on Debian 8.8 (jessie)
-FROM google/cloud-sdk:159.0.0-slim
+FROM google/cloud-sdk:166.0.0-slim
 
 RUN \
     # Docker client
