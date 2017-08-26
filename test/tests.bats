@@ -53,6 +53,11 @@
     git clone https://github.com/reactjs/redux.git
 }
 
+@test "Terraform is installed" {
+    terraform init
+    terraform validate
+}
+
 # This is kind of lame, but a more useful functional tests would require registering keys, etc.
 @test "SSH is installed" {
     ssh -V
