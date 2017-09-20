@@ -15,6 +15,10 @@
     yarn remove phantomjs-prebuilt
 }
 
+@test "NPM is not a thing" {
+    test -z $(which npm)
+}
+
 @test "Java can compile and run Java8 things" {
     ./gradlew compileJava
 }

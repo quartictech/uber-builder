@@ -7,6 +7,10 @@ RUN \
     curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
     echo "deb [arch=amd64] https://download.docker.com/linux/debian jessie stable" > /etc/apt/sources.list.d/docker.list && \
 
+    # Node
+    # (see https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
+    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+
     # Yarn
     # (see https://yarnpkg.com/lang/en/docs/install/#linux-tab)
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -19,6 +23,7 @@ RUN \
     apt-get update && \
     apt-get install --no-install-recommends -y \
         docker-ce=17.06.0~ce-0~debian \
+        nodejs=8.5.0-1nodesource1 \
         yarn=1.0.2-1 \
         ruby=1:2.1.5+deb8u2 ruby-dev=1:2.1.5+deb8u2 \
         python3-venv=3.4.2-2 \
@@ -33,6 +38,9 @@ RUN \
     apt-get install --no-install-recommends -y -t jessie-backports \
         openjdk-8-jdk=8u131-b11-1~bpo8+1 && \
     rm -rf /var/lib/apt/lists/*
+
+# Because NPM is raging
+RUN npm uninstall -g npm
 
 # Install Terraform (see https://github.com/hashicorp/docker-hub-images/blob/master/terraform/Dockerfile-light)
 RUN \
