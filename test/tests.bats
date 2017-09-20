@@ -1,18 +1,19 @@
 #!/usr/bin/env bats
 
 @test "Yarn can install things" {
-    yarn global add redux@3.7.0
-    yarn global remove redux
+    yarn add redux@3.7.0
+    yarn remove redux
 }
 
 @test "Yarn can install package that needs make" {
-    yarn global add time@0.12.0
-    yarn global remove time
+    yarn add time@0.12.0
+    cat package.json
+    yarn remove time
 }
 
 @test "Yarn can install package that needs bzip2" {
-    yarn global add phantomjs-prebuilt@2.1.14
-    yarn global remove phantomjs-prebuilt
+    yarn add phantomjs-prebuilt@2.1.14
+    yarn remove phantomjs-prebuilt
 }
 
 @test "NPM is not a thing" {
