@@ -7,8 +7,7 @@
 
 @test "Yarn can install package that needs make" {
     yarn add time@0.12.0
-    cat package.json
-    yarn remove time
+#    yarn remove time   # Some fringe bug in Yarn means that it's not actually writing to package.json - see e.g. https://circleci.com/gh/quartictech/uber-builder/102
 }
 
 @test "Yarn can install package that needs bzip2" {
