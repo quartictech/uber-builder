@@ -19,7 +19,6 @@ RUN \
     apt-get update && \
     apt-get install --no-install-recommends -y \
         docker-ce=17.06.0~ce-0~debian \
-        nodejs=8.4.0-1nodesource1~jessie1\
         yarn=1.0.2-1 \
         ruby=1:2.1.5+deb8u2 ruby-dev=1:2.1.5+deb8u2 \
         python3-venv=3.4.2-2 \
