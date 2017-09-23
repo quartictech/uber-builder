@@ -34,6 +34,13 @@
     python -c 'print("Hello")'      # Would fail if Python 2
 }
 
+@test "Can install and run pip-tools" {
+    python3 -m venv .env
+    source .env/bin/activate
+    pip install pip-tools
+    pip-compile                     # Fails if locale variables aren't set, or if we're using old version of pip
+}
+
 @test "Aspell can check for GB spelling" {
     test "color" == "$(echo 'color colour' | aspell list -l en_GB)"
 }

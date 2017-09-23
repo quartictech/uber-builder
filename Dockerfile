@@ -1,11 +1,25 @@
-# This is based on Debian 8.8 (jessie)
-FROM google/cloud-sdk:166.0.0-slim
+FROM debian:9.1
+
+# Prerequisites
+RUN \
+    apt-get update && \
+    apt-get install --no-install-recommends -y \
+        curl \
+        apt-transport-https \
+        ca-certificates \
+        gnupg && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN \
+    # GCloud SDK
+    # (see https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu)
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    echo "deb http://packages.cloud.google.com/apt cloud-sdk-stretch main" > /etc/apt/sources.list.d/google-cloud-sdk.list && \
+
     # Docker client
     # (see https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
     curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
-    echo "deb [arch=amd64] https://download.docker.com/linux/debian jessie stable" > /etc/apt/sources.list.d/docker.list && \
+    echo "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable" > /etc/apt/sources.list.d/docker.list && \
 
     # Node
     # (see https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
@@ -16,27 +30,24 @@ RUN \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
 
-    # JDK
-    echo "deb http://http.debian.net/debian jessie-backports main" >> /etc/apt/sources.list.d/jessie-backports.list && \
-
     # Finally
     apt-get update && \
     apt-get install --no-install-recommends -y \
-        docker-ce=17.06.0~ce-0~debian \
+        google-cloud-sdk=172.0.1-0 \
+        docker-ce=17.06.2~ce-0~debian \
         nodejs=8.5.0-1nodesource1 \
         yarn=1.0.2-1 \
-        ruby=1:2.1.5+deb8u2 ruby-dev=1:2.1.5+deb8u2 \
-        python3-venv=3.4.2-2 \
+        ruby=1:2.3.3 ruby-dev=1:2.3.3 \
+        python3=3.5.3-1 python3-pip=9.0.1-2 python3-venv=3.5.3-1 \
+        openjdk-8-jdk=8u141-b15-1~deb9u1 \
         # Other required things
-        aspell=0.60.7~20110707-1.3 aspell-en=7.1-0-1.1 \
-        build-essential=11.7 \
+        aspell=0.60.7~20110707-3+b2 aspell-en=2016.11.20-0-0.1 \
+        build-essential=12.3 \
         bzip2 \
         git \
         rsync \
         ssh \
         unzip && \
-    apt-get install --no-install-recommends -y -t jessie-backports \
-        openjdk-8-jdk=8u131-b11-1~bpo8+1 && \
     rm -rf /var/lib/apt/lists/*
 
 # Because NPM is raging
@@ -55,6 +66,9 @@ ADD /scripts /scripts
 ENV PATH="/scripts:/home/quartic/.gem/bin:${PATH}"
 
 USER quartic
+
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 
 # Install Bundler (and disable warning given that we have to run as root)
 ENV GEM_HOME="/home/quartic/.gem"
