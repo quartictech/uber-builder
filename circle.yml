@@ -2,10 +2,10 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~/
+    working_directory: ~/uber-builder
     
     docker:
-      - image: docker
+      - image: docker:17.07.0-ce-git
 
     steps:
       - checkout
