@@ -71,7 +71,7 @@
 
 @test "Can authenticate to GCloud (new)" {
     google-cloud-auth
-    gcloud compute instances list
+    gcloud container images list    # Using this particular command because new service account can basically do only this
 }
 
 # This will also fail if Docker client isn't installed
