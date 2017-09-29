@@ -22,8 +22,11 @@ RUN \
     echo "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable" > /etc/apt/sources.list.d/docker.list && \
 
     # Node
-    # (see https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
-    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    # (see https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions, we've extracted
+    # the salient content of the installation script)
+    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    echo 'deb https://deb.nodesource.com/node_8.x stretch main' > /etc/apt/sources.list.d/nodesource.list && \
+    echo 'deb-src https://deb.nodesource.com/node_8.x stretch main' >> /etc/apt/sources.list.d/nodesource.list && \
 
     # Yarn
     # (see https://yarnpkg.com/lang/en/docs/install/#linux-tab)
@@ -35,7 +38,7 @@ RUN \
     apt-get install --no-install-recommends -y \
         google-cloud-sdk=172.0.1-0 \
         docker-ce=17.06.2~ce-0~debian \
-        nodejs=8.5.0-1nodesource1 \
+        nodejs=8.6.0-1nodesource1 \
         yarn=1.0.2-1 \
         ruby=1:2.3.3 ruby-dev=1:2.3.3 \
         python3=3.5.3-1 python3-pip=9.0.1-2 python3-venv=3.5.3-1 \
