@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+echo ${GCLOUD_SERVICE_KEY_BASE64} | base64 -d > ${HOME}/gcloud-service-key.json
+gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+rm ${HOME}/gcloud-service-key.json
+
+# TODO: parse args for --with-docker
+if [ "$#" -eq 1 ]; then
+    docker login -u oauth2accesstoken -p "$(gcloud auth print-access-token)" https://eu.gcr.io
+fi

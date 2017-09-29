@@ -64,8 +64,13 @@
     ssh -V
 }
 
-@test "Can authenticate to GCloud" {
+@test "Can authenticate to GCloud (old)" {
     gcloud-auth
+    gcloud compute instances list
+}
+
+@test "Can authenticate to GCloud (new)" {
+    google-cloud-auth
     gcloud compute instances list
 }
 
