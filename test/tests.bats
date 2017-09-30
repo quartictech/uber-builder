@@ -64,6 +64,10 @@
     ssh -V
 }
 
+@test "Kubectl is installed" {
+    kubectl version -c   # -c because no server available here
+}
+
 @test "Can authenticate to GCloud (old)" {
     gcloud-auth
     gcloud compute instances list

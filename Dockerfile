@@ -36,7 +36,8 @@ RUN \
     # Finally
     apt-get update && \
     apt-get install --no-install-recommends -y \
-        google-cloud-sdk=172.0.1-0 \
+        google-cloud-sdk=173.0.0-0 \
+        kubectl=1.7.5-00 \
         docker-ce=17.06.2~ce-0~debian \
         nodejs=8.6.0-1nodesource1 \
         yarn=1.0.2-1 \
