@@ -63,8 +63,6 @@ RUN \
     unzip terraform.zip -d /bin && \
     rm terraform.zip
 
-RUN gcloud components install kubectl
-
 RUN useradd -ms /bin/bash quartic
 
 # Helper scripts
