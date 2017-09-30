@@ -1,21 +1,14 @@
 FROM debian:9.1
 
-# Prerequisites
-RUN \
-    apt-get update && \
-    apt-get install --no-install-recommends -y \
-        curl \
-        apt-transport-https \
-        ca-certificates \
-        gnupg && \
-    rm -rf /var/lib/apt/lists/*
-
 # APT repos
-ADD /apt/sources.list.d/ /etc/apt/sources.list.d
 ADD /apt/keys /keys
 RUN \
+    apt-get update && \
+    apt-get install --no-install-recommends -y gnupg && \
     apt-key add /keys/* && \
-    rm -rf /keys
+    rm -rf /keys && \
+    rm -rf /var/lib/apt/lists/*
+ADD /apt/sources.list.d/ /etc/apt/sources.list.d
 
 RUN \
     # Finally
