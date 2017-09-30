@@ -65,7 +65,7 @@
 }
 
 @test "Kubectl is installed" {
-    kubectl version
+    kubectl version -c   # -c because no server available here
 }
 
 @test "Can authenticate to GCloud (old)" {
