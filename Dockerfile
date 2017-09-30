@@ -10,29 +10,14 @@ RUN \
         gnupg && \
     rm -rf /var/lib/apt/lists/*
 
+# APT repos
+ADD /apt/sources.list.d/ /etc/apt/sources.list.d
+ADD /apt/keys /keys
 RUN \
-    # GCloud SDK
-    # (see https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu)
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    echo "deb http://packages.cloud.google.com/apt cloud-sdk-stretch main" > /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    apt-key add /keys/* && \
+    rm -rf /keys
 
-    # Docker client
-    # (see https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
-    curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
-    echo "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable" > /etc/apt/sources.list.d/docker.list && \
-
-    # Node
-    # (see https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions, we've extracted
-    # the salient content of the installation script)
-    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-    echo 'deb https://deb.nodesource.com/node_8.x stretch main' > /etc/apt/sources.list.d/nodesource.list && \
-    echo 'deb-src https://deb.nodesource.com/node_8.x stretch main' >> /etc/apt/sources.list.d/nodesource.list && \
-
-    # Yarn
-    # (see https://yarnpkg.com/lang/en/docs/install/#linux-tab)
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
-
+RUN \
     # Finally
     apt-get update && \
     apt-get install --no-install-recommends -y \

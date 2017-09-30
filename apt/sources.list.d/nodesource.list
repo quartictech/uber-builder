@@ -1,0 +1,4 @@
+# See https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions\
+# (we've extracted the salient content of the installation script)
+deb https://deb.nodesource.com/node_8.x stretch main
+deb-src https://deb.nodesource.com/node_8.x stretch main

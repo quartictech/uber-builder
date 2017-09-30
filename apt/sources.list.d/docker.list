@@ -1,0 +1,2 @@
+# See https://docs.docker.com/engine/installation/linux/docker-ce/debian/
+deb [arch=amd64] https://download.docker.com/linux/debian stretch stable

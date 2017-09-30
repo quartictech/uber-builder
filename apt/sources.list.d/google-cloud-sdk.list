@@ -1,0 +1,2 @@
+# See https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu
+deb http://packages.cloud.google.com/apt cloud-sdk-stretch main
