@@ -6,7 +6,7 @@ jobs:
       - image: ${GCLOUD_DOCKER_REPOSITORY}/uber-builder:127
         auth:
           username: _json_key
-          password: ${GCLOUD_SERVICE_KEY}
+          password: ${GOOGLE_CREDENTIALS}
 
     working_directory: ~/uber-builder
 
@@ -25,7 +25,7 @@ jobs:
           # See https://circleci.com/docs/2.0/building-docker-images/#mounting-folders
           command: |
             docker create \
-              -e "GCLOUD_SERVICE_KEY=${GCLOUD_SERVICE_KEY}" \
+              -e "GOOGLE_CREDENTIALS=${GOOGLE_CREDENTIALS}" \
               --name test uber-builder /home/quartic/test/run_tests.sh
             # This permission change (along with the -a below) seems to be necessary to ensure
             # the quartic user inside the container can write to the test directory.
@@ -40,5 +40,5 @@ jobs:
       - run:
           name: Publish Docker image
           command: |
-            docker tag uber-builder ${GCLOUD_DOCKER_REPOSITORY}/uber-builder:${CIRCLE_BUILD_NUM}
-            docker push ${GCLOUD_DOCKER_REPOSITORY}/uber-builder:${CIRCLE_BUILD_NUM}
+            docker tag uber-builder ${GOOGLE_DOCKER_REPOSITORY}/uber-builder:${CIRCLE_BUILD_NUM}
+            docker push ${GOOGLE_DOCKER_REPOSITORY}/uber-builder:${CIRCLE_BUILD_NUM}
