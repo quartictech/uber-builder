@@ -25,7 +25,7 @@ jobs:
           # See https://circleci.com/docs/2.0/building-docker-images/#mounting-folders
           command: |
             docker create \
-              -e "GOOGLE_CREDENTIALS=${GOOGLE_CREDENTIALS}" \
+              -e GOOGLE_CREDENTIALS \
               --name test uber-builder /home/quartic/test/run_tests.sh
             # This permission change (along with the -a below) seems to be necessary to ensure
             # the quartic user inside the container can write to the test directory.
