@@ -3,8 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ${GOOGLE_DOCKER_REPOSITORY}/uber-builder:139
-        auth: { username: _json_key, password: "${GOOGLE_CREDENTIALS}" }
+      - image: docker:17.07.0-ce-git
 
     working_directory: ~/uber-builder
 
@@ -32,9 +31,11 @@ jobs:
             docker start -a test
 
       - run:
-          name: GCloud auth
-          command: google-cloud-auth --with-docker
+          name: Docker Hub auth
+          command: docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
 
       - run:
           name: Publish Docker image
-          command: docker-tag-and-push uber-builder ${CIRCLE_BUILD_NUM}
+          command: |
+            docker tag uber-builder quartic/uber-builder:${CIRCLE_BUILD_NUM}
+            docker push quartic/uber-builder:${CIRCLE_BUILD_NUM}
