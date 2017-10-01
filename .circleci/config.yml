@@ -3,10 +3,8 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ${GCLOUD_DOCKER_REPOSITORY}/uber-builder:137
-        auth:
-          username: _json_key
-          password: ${GOOGLE_CREDENTIALS}
+      - image: ${GCLOUD_DOCKER_REPOSITORY}/uber-builder:139
+        auth: { username: _json_key, password: "${GOOGLE_CREDENTIALS}" }
 
     working_directory: ~/uber-builder
 
@@ -39,6 +37,4 @@ jobs:
 
       - run:
           name: Publish Docker image
-          command: |
-            docker tag uber-builder ${GOOGLE_DOCKER_REPOSITORY}/uber-builder:${CIRCLE_BUILD_NUM}
-            docker push ${GOOGLE_DOCKER_REPOSITORY}/uber-builder:${CIRCLE_BUILD_NUM}
+          command: docker-tag-and-push uber-builder ${CIRCLE_BUILD_NUM}
