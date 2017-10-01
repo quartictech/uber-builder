@@ -1,7 +1,8 @@
 #!/bin/sh
 set -eu
 
-echo "${GOOGLE_CREDENTIALS}" > ${HOME}/gcloud-service-key.json
+# See https://unix.stackexchange.com/a/214859/99712 for details on printf
+printf '%s\n' "${GOOGLE_CREDENTIALS}" > ${HOME}/gcloud-service-key.json
 gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
 rm ${HOME}/gcloud-service-key.json
 
