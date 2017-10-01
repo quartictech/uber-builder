@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ${GCLOUD_DOCKER_REPOSITORY}/uber-builder:139
+      - image: ${GOOGLE_DOCKER_REPOSITORY}/uber-builder:139
         auth: { username: _json_key, password: "${GOOGLE_CREDENTIALS}" }
 
     working_directory: ~/uber-builder
