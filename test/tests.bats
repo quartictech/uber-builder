@@ -68,19 +68,14 @@
     kubectl version -c   # -c because no server available here
 }
 
-@test "Can authenticate to GCloud (old)" {
-    gcloud-auth
-    gcloud compute instances list
-}
-
-@test "Can authenticate to GCloud (new)" {
+@test "Can authenticate to GCloud" {
     google-cloud-auth
-    gcloud container images list    # Using this particular command because new service account can basically do only this
+    gcloud container images list    # Using this particular command because service account can basically do only this
 }
 
 # This will also fail if Docker client isn't installed
 @test "Can login to GCloud Docker registry" {
     skip "Unclear how to run dockerd inside Docker inside Docker inside..."
-    gcloud-auth --with-docker
+    google-cloud-auth --with-docker
     docker pull eu.gcr.io/quartictech/scheduled-jobs:85  # Some random image (the smallest one I could find)
 }
