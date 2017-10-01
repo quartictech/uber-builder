@@ -3,7 +3,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: quartic/uber-builder:117
+      - image: ${GCLOUD_DOCKER_REPOSITORY}/uber-builder:126
+        auth:
+          username: _json_key
+          password: ${GCLOUD_SERVICE_KEY}
 
     working_directory: ~/uber-builder
 
