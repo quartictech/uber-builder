@@ -2,10 +2,10 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~/uber-builder
-    
     docker:
-      - image: docker:17.07.0-ce-git
+      - image: quartic/uber-builder:117
+
+    working_directory: ~/uber-builder
 
     steps:
       - checkout
@@ -32,7 +32,7 @@ jobs:
 
       - run:
           name: GCloud auth
-          command: ./scripts/google-cloud-auth --with-docker
+          command: google-cloud-auth --with-docker
 
       - run:
           name: Publish Docker image
