@@ -2,10 +2,10 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~/uber-builder
-    
     docker:
       - image: docker:17.07.0-ce-git
+
+    working_directory: ~/uber-builder
 
     steps:
       - checkout
@@ -15,24 +15,27 @@ jobs:
 
       - run:
           name: Build image
-          command: docker build -t quartic/uber-builder:${CIRCLE_BUILD_NUM} .
+          command: docker build -t uber-builder .
 
       - run:
           name: Run tests
           # See https://circleci.com/docs/2.0/building-docker-images/#mounting-folders
           command: |
             docker create \
-              -e "GCLOUD_SERVICE_KEY=${GCLOUD_SERVICE_KEY}" \
-              -e "GCLOUD_PROJECT_ID=${GCLOUD_PROJECT_ID}" \
-              -e "GCLOUD_SERVICE_KEY_BASE64=${GCLOUD_SERVICE_KEY_BASE64}" \
-              --name test quartic/uber-builder:${CIRCLE_BUILD_NUM} /home/quartic/test/run_tests.sh
+              -e GOOGLE_CREDENTIALS \
+              --name test uber-builder /home/quartic/test/run_tests.sh
             # This permission change (along with the -a below) seems to be necessary to ensure
             # the quartic user inside the container can write to the test directory.
             chmod -R a+rw $(pwd)/test
             docker cp -a $(pwd)/test test:/home/quartic/test
             docker start -a test
 
-      - deploy:
+      - run:
+          name: Docker Hub auth
+          command: docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
+
+      - run:
+          name: Publish Docker image
           command: |
-            docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
+            docker tag uber-builder quartic/uber-builder:${CIRCLE_BUILD_NUM}
             docker push quartic/uber-builder:${CIRCLE_BUILD_NUM}

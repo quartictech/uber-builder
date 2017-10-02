@@ -1,11 +1,12 @@
 #!/bin/sh
 set -eu
 
-echo ${GCLOUD_SERVICE_KEY_BASE64} | base64 -d > ${HOME}/gcloud-service-key.json
+# See https://unix.stackexchange.com/a/214859/99712 for details on printf
+printf '%s\n' "${GOOGLE_CREDENTIALS}" > ${HOME}/gcloud-service-key.json
 gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
 rm ${HOME}/gcloud-service-key.json
 
 # TODO: parse args for --with-docker
 if [ "$#" -eq 1 ]; then
-    docker login -u oauth2accesstoken -p "$(gcloud auth print-access-token)" https://eu.gcr.io
+    docker login -u _json_key -p "${GOOGLE_CREDENTIALS}" https://eu.gcr.io
 fi
