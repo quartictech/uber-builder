@@ -19,8 +19,8 @@ jobs:
       - run:
           name: Run tests
           command: |
-            test/run_tests.sh uber-builder   tests.noober.bats tests.uber.bats
-            test/run_tests.sh noober-builder tests.noober.bats
+            ./test/run_tests.sh uber-builder   tests.noober.bats tests.uber.bats
+            ./test/run_tests.sh noober-builder tests.noober.bats
 
       - run: docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
 
