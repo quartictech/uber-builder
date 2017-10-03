@@ -1,0 +1,35 @@
+FROM debian:9.1
+
+# Prerequisites
+RUN \
+    apt-get update && \
+    apt-get install --no-install-recommends -y \
+        curl \
+        apt-transport-https \
+        ca-certificates \
+        gnupg && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN \
+    # GCloud SDK
+    # (see https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu)
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    echo "deb http://packages.cloud.google.com/apt cloud-sdk-stretch main" > /etc/apt/sources.list.d/google-cloud-sdk.list && \
+
+    # Finally
+    apt-get update && \
+    apt-get install --no-install-recommends -y \
+        google-cloud-sdk=173.0.0-0 \
+        kubectl=1.7.5-00 \
+    rm -rf /var/lib/apt/lists/*
+
+# Helper scripts
+ADD /scripts /scripts
+ENV PATH="/scripts:/home/quartic/.gem/bin:${PATH}"
+
+USER quartic
+
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+WORKDIR /home/quartic
