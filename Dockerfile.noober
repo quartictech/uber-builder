@@ -20,7 +20,7 @@ RUN \
     apt-get update && \
     apt-get install --no-install-recommends -y \
         google-cloud-sdk=173.0.0-0 \
-        kubectl=1.7.5-00 \
+        kubectl=1.7.5-00 && \
     rm -rf /var/lib/apt/lists/*
 
 # Helper scripts
