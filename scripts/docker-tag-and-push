@@ -1,8 +1,15 @@
 #!/bin/sh
 set -eu
 
+if [ "$#" -eq 3 ]; then
+    REPOSITORY=${1}
+    shift
+else
+    REPOSITORY=${GOOGLE_DOCKER_REPOSITORY}
+fi
+
 IMAGE=${1}
 TAG=${2}
 
-docker tag ${1} ${GOOGLE_DOCKER_REPOSITORY}/${1}:${2}
-docker push ${GOOGLE_DOCKER_REPOSITORY}/${1}:${2}
+docker tag ${IMAGE} ${REPOSITORY}/${IMAGE}:${TAG}
+docker push ${REPOSITORY}/${IMAGE1}:${TAG}
