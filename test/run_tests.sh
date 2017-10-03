@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 set -eu
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 IMAGE_NAME=${1}
 shift
