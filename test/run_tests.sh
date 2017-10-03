@@ -14,3 +14,5 @@ docker create \
 chmod -R a+rw $(pwd)/test
 docker cp -a $(pwd)/test test:/home/quartic/test
 docker start -a test
+
+docker rm -f test
