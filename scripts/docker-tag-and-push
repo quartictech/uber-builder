@@ -4,5 +4,5 @@ set -eu
 IMAGE=${1}
 TAG=${2}
 
-docker tag ${1} ${GOOGLE_DOCKER_REPOSITORY}/${1}:${2}
-docker push ${GOOGLE_DOCKER_REPOSITORY}/${1}:${2}
+docker tag ${IMAGE} ${GOOGLE_DOCKER_REPOSITORY}/${IMAGE}:${TAG}
+docker push ${GOOGLE_DOCKER_REPOSITORY}/${IMAGE}:${TAG}

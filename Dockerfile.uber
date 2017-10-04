@@ -63,12 +63,11 @@ RUN \
     unzip terraform.zip -d /bin && \
     rm terraform.zip
 
-RUN useradd -ms /bin/bash quartic
-
 # Helper scripts
 ADD /scripts /scripts
 ENV PATH="/scripts:/home/quartic/.gem/bin:${PATH}"
 
+RUN useradd -ms /bin/bash quartic
 USER quartic
 
 ENV LC_ALL=C.UTF-8

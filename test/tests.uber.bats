@@ -64,15 +64,6 @@
     ssh -V
 }
 
-@test "Kubectl is installed" {
-    kubectl version -c   # -c because no server available here
-}
-
-@test "Can authenticate to GCloud" {
-    google-cloud-auth
-    gcloud container images list    # Using this particular command because service account can basically do only this
-}
-
 # This will also fail if Docker client isn't installed
 @test "Can login to GCloud Docker registry" {
     skip "Unclear how to run dockerd inside Docker inside Docker inside..."

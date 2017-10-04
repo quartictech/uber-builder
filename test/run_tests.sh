@@ -1,12 +1,18 @@
-#!/bin/bash
+#!/bin/sh
 set -eu
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-git clone https://github.com/sstephenson/bats.git
-pushd bats
-./install.sh /home/quartic/
-popd
+IMAGE_NAME=${1}
+shift
 
-pushd ${DIR}
-/home/quartic/bin/bats tests.bats
-popd
+# See https://circleci.com/docs/2.0/building-docker-images/#mounting-folders
+docker create \
+    -e GOOGLE_CREDENTIALS \
+    --name test ${IMAGE_NAME} /home/quartic/test/run_tests_internal.sh "$@"
+
+# This permission change (along with the -a below) seems to be necessary to ensure
+# the quartic user inside the container can write to the test directory.
+chmod -R a+rw $(pwd)/test
+docker cp -a $(pwd)/test test:/home/quartic/test
+docker start -a test
+
+docker rm -f test
